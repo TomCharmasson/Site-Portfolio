@@ -1,0 +1,763 @@
+/* Reset minimal et bonnes pratiques MDN */
+:root {
+    --max-width: 1000px;
+    --accent: #01497c;
+    --muted: #6b7280;
+    --bg: #ffffff;
+    --text: #111827;
+    --radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: "Roboto Condensed", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    /* fond uni avec motif d'étoiles plus visibles */
+    /* fond uni (SVG d'étoiles retiré) */
+    background-image: linear-gradient(180deg, var(--bg) 0%, #f8fbff 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    z-index: 60;
+    border-bottom: 1px solid #eee;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 20px;
+}
+
+.brand {
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 1.125rem;
+    padding-left: 6px;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.nav-list a {
+    text-decoration: none;
+    color: var(--muted);
+    padding: 6px 8px;
+    border-radius: 6px;
+}
+.nav-list a[aria-current="page"],
+.nav-list a.is-active,
+.nav-list a:focus,
+.nav-list a:hover {
+    color: var(--accent);
+    background: rgba(11, 92, 255, 0.06);
+}
+
+.hero {
+    min-height: calc(100vh - var(--header-height, 72px));
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.profil-img {
+    width: clamp(160px, 20vw, 260px);
+    height: clamp(160px, 20vw, 260px);
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hero-text {
+    max-width: 760px;
+    padding: 0 12px;
+    margin-bottom: 50px;
+}
+.hero-text h1 {
+    margin: 0 0 8px 0;
+    font-size: clamp(1.75rem, 4.2vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+}
+.hero-text h2 {
+    margin: 0 0 14px 0;
+    font-size: clamp(1rem, 2.2vw, 1.375rem);
+    font-weight: 400;
+    color: var(--muted);
+}
+.lead {
+    margin: 0 0 18px 0;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.9vw, 1.125rem);
+}
+
+/* boutons plus visibles et proportionnés */
+.actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.btn {
+    border: 0;
+    padding: 14px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font: inherit;
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+}
+.btn.primary {
+    background: var(--accent);
+    color: white;
+}
+.btn.secondary {
+    background: #f3f4f6;
+    color: var(--text);
+}
+.btn:focus {
+    outline: none;
+}
+.btn.primary:focus-visible {
+    box-shadow: 0 0 0 4px rgba(11, 92, 255, 0.22);
+}
+.btn.secondary:focus-visible {
+    box-shadow: 0 0 0 4px rgba(16, 24, 40, 0.08);
+}
+.btn:focus-visible {
+    box-shadow: 0 0 0 4px rgba(11, 92, 255, 0.18);
+    border-radius: 12px;
+    outline: 2px solid rgba(11, 92, 255, 0.06); /* renfort optionnel */
+}
+
+/* animations sobres et modernes pour les boutons du hero */
+.actions .btn {
+    transition: transform 180ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 180ms ease, background-color 180ms ease, filter 180ms ease;
+    will-change: transform, box-shadow;
+    transform-origin: center;
+}
+
+/* hover / focus */
+.actions .btn:hover,
+.actions .btn:focus-visible {
+    transform: translateY(-4px) scale(1.02);
+    text-decoration: none;
+}
+.actions .btn.primary:hover,
+.actions .btn.primary:focus-visible {
+    box-shadow: 0 14px 30px rgba(11, 92, 255, 0.12);
+    filter: brightness(1.03);
+}
+.actions .btn.secondary:hover,
+.actions .btn.secondary:focus-visible {
+    box-shadow: 0 10px 22px rgba(16, 24, 40, 0.06);
+}
+
+/* active (pression) */
+.actions .btn:active {
+    transform: translateY(-1px) scale(0.995);
+    transition-duration: 120ms;
+}
+
+/* accent animé discret sur focus-visible (accessibilité) */
+.actions .btn:focus-visible {
+    box-shadow: 0 0 0 6px rgba(11, 92, 255, 0.12);
+}
+
+/* léger effet "shine" sur primary (optionnel, sobre) */
+.actions .btn.primary {
+    position: relative;
+    overflow: hidden;
+}
+.actions .btn.primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.06) 100%);
+    transform: translateX(-120%);
+    transition: transform 550ms cubic-bezier(0.2, 0.9, 0.2, 1);
+    pointer-events: none;
+}
+.actions .btn.primary:hover::after,
+.actions .btn.primary:focus-visible::after {
+    transform: translateX(0%);
+}
+
+/* sections */
+section {
+    padding: 28px 0;
+}
+
+/* Centrer tous les titres de niveau 2 */
+h2 {
+    text-align: center;
+}
+
+/* footer */
+.site-footer {
+    border-top: 1px solid #eee;
+    padding: 20px 0;
+    color: var(--muted);
+}
+.site-footer .container {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+}
+.site-footer p {
+    margin: 0;
+}
+
+/* accessibilité: cache visuel pour SR text */
+.sr-only {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* bouton toggle (caché sur desktop) */
+.nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--muted);
+}
+.nav-toggle:focus {
+    outline: 3px solid rgba(11, 92, 255, 0.12);
+    outline-offset: 2px;
+}
+
+/* responsive: empile les éléments sur petits écrans */
+@media (max-width: 700px) {
+    .hero {
+        padding: 36px 12px;
+        gap: 18px;
+    }
+    .hero-text {
+        text-align: center;
+    }
+    .hero-text h1 {
+        font-size: clamp(1.5rem, 6.5vw, 2.25rem);
+    }
+    .profil-img {
+        width: clamp(140px, 28vw, 180px);
+        height: clamp(140px, 28vw, 180px);
+    }
+    .btn {
+        padding: 12px 14px;
+    }
+}
+
+/* responsive: menu mobile */
+@media (max-width: 700px) {
+    .header-inner {
+        padding-left: 22px;
+        padding-right: 56px; /* espace pour le bouton burger */
+        position: relative;
+    }
+
+    .nav-toggle {
+        display: inline-flex;
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 70;
+    }
+
+    /* garde le nav déroulé aligné à droite sous le bouton */
+    .nav-list {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 16px;
+        flex-direction: column;
+        gap: 6px;
+        background: var(--bg);
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 6px 20px rgba(16, 24, 40, 0.08);
+        min-width: 200px;
+        border: 1px solid #f0f0f0;
+        z-index: 40;
+    }
+    .nav-list.open {
+        display: flex;
+    }
+}
+
+/* espace réservé pour le contenu sous le header */
+main.container {
+    padding-top: var(--header-height, 72px);
+}
+
+/* grille de projets */
+.projects-grid {
+    padding: 20px;
+}
+
+/* carte */
+.card {
+    background: linear-gradient(180deg, #ffffff, #fbfdff);
+    border: 1px solid #eef2f6;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+    transition: transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 220ms ease;
+}
+
+/* média / image */
+.card-media {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+/* corps */
+.card-body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.card h3 {
+    margin: 0;
+    font-size: 1.125rem;
+}
+.card-desc {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* tags */
+.card-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 0;
+}
+.card-tags span {
+    font-size: 0.75rem;
+    color: var(--accent);
+    background: rgba(11, 92, 255, 0.06);
+    padding: 4px 8px;
+    border-radius: 999px;
+}
+
+/* actions */
+.card-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+}
+.card .btn {
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+}
+
+/* hover / focus */
+.card:hover,
+.card:focus-within {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(16, 24, 40, 0.08);
+}
+
+/* responsive */
+@media (max-width: 1000px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 700px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    .card {
+        border-radius: 12px;
+    }
+    .card-body {
+        padding: 12px;
+    }
+    .card h3 {
+        font-size: 1.05rem;
+    }
+}
+
+/* Canvas de fond pour l'animation 3D (étoiles/vagues) */
+.bg-canvas {
+    position: fixed !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: -1;
+    pointer-events: none;
+    display: block;
+}
+
+/* Contact list with icons */
+.contact-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.contact-list li {
+    margin: 0;
+}
+.contact-list a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    text-decoration: none;
+    color: var(--text);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(250, 251, 255, 0.92));
+    padding: 5px;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 1px solid rgba(16, 24, 40, 0.04);
+    box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+    transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+.contact-list svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--accent);
+}
+.contact-list a:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(16, 24, 40, 0.06);
+}
+.contact-list .icon {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    color: var(--accent);
+}
+
+@media (min-width: 700px) {
+    .contact-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .contact-list a {
+        width: 80px;
+        height: 48px;
+        padding: 10px;
+    }
+}
+
+/* Hobbies icons group */
+.hobbies {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+.hobby-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 247, 250, 0.92));
+    border: 1px solid rgba(16, 24, 40, 0.04);
+    box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+    color: var(--accent);
+    text-decoration: none;
+    transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+.hobby-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(16, 24, 40, 0.06);
+}
+.hobby-btn .icon {
+    width: 30px;
+    height: 30px;
+}
+
+@media (max-width: 480px) {
+    .hobby-btn {
+        width: 48px;
+        height: 48px;
+    }
+    .hobby-btn .icon {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Skill cards */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 18px;
+}
+@media screen and (min-width: 768px) {
+    .skills-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .skills-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+.skill-card {
+    background: linear-gradient(180deg, #ffffff, #fbfdff);
+    border: 1px solid #eef2f6;
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.04);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.skill-card .skill-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 12px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.skill-card .skill-icon img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.skill-card h4 {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    text-align: center;
+}
+.skill-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* 3D hover / tilt effect - subtle */
+.skill-cards {
+    perspective: 900px;
+}
+.skill-card {
+    transform-style: preserve-3d;
+    transition: transform 350ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 350ms ease;
+    will-change: transform;
+}
+.skill-card.is-hover {
+    box-shadow: 0 22px 60px rgba(16, 24, 40, 0.12);
+}
+.skill-card .skill-icon {
+    transition: transform 350ms cubic-bezier(0.2, 0.9, 0.2, 1);
+    transform: translateZ(0);
+}
+.skill-card.is-hover .skill-icon {
+    transform: translateZ(20px) translateY(-2px);
+}
+
+/* Overlay entre le fond animé et le contenu pour lisibilité */
+.bg-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(180deg, rgba(6, 10, 25, 0.18) 0%, rgba(6, 10, 25, 0.06) 40%, rgba(6, 10, 25, 0.04) 60%, rgba(6, 10, 25, 0.08) 100%);
+    mix-blend-mode: normal;
+}
+
+/* place le contenu au-dessus de l'overlay */
+main.container {
+    position: relative;
+    z-index: 1;
+}
+
+.experience-title {
+    display: flex;
+    align-items: center;
+}
+.experience-title .img-container {
+    border-radius: 20px;
+    width: 100px;
+    height: 60px;
+    padding: 10px;
+    margin-right: 12px;
+    background: #f3f4f6;
+    box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+    border: 1px solid #eef2f6;
+}
+.experience-title .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.formation-title {
+    display: flex;
+    align-items: center;
+}
+.formation-title .img-container {
+    border-radius: 20px;
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+    margin-right: 12px;
+    background: #f3f4f6;
+    box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+    border: 1px solid #eef2f6;
+}
+.formation-title .img-container svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.arrow {
+    transform: translate(-50%, -50%);
+}
+
+.arrow span {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-bottom: 4px solid var(--accent);
+    border-right: 4px solid var(--accent);
+    transform: rotate(45deg);
+    margin: -10px;
+    animation: animate 2s infinite;
+}
+
+.arrow span:nth-child(2) {
+    animation-delay: -0.2s;
+}
+
+.arrow span:nth-child(3) {
+    animation-delay: -0.4s;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-20px, -20px);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(20px, 20px);
+    }
+}
+
+.scroll-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scrollbar-width: thin; /* Optional: Customize scrollbar */
+    scrollbar-color: transparent transparent;
+    cursor: grab; /* Indicates the container is draggable */
+    user-select: none; /* Prevent text selection during drag */
+}
+
+.scroll-container:active {
+    cursor: grabbing; /* Change cursor while dragging */
+}
+
+/* Hide scrollbar for Chrome/Safari (optional) */
+.scroll-container::-webkit-scrollbar {
+    height: 8px;
+    background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+/* Items inside the container */
+.scroll-item {
+    display: inline-block;
+    width: 300px; /* Adjust as needed */
+    margin-right: 15px;
+    vertical-align: top;
+    white-space: normal;
+    pointer-events: auto; /* Ensure clicks work on items */
+}
