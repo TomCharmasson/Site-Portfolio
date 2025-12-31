@@ -349,7 +349,7 @@ main.container {
 
 /* grille de projets */
 .projects-grid {
-    padding: 20px;
+    padding: 25px;
 }
 
 /* carte */
@@ -389,6 +389,7 @@ main.container {
     color: var(--muted);
     font-size: 0.95rem;
     line-height: 1.4;
+    min-height: calc(1.4em * 2); /* Hauteur minimale de 2 lignes */
 }
 
 /* tags */
